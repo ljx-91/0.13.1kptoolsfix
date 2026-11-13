@@ -14,6 +14,16 @@
 
 #include <string.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#include <wchar.h>
+#include <io.h>
+FILE *kp_fopen(const char *path, const char *mode);
+#define fopen kp_fopen
+/* File permission bits have no equivalent for ordinary Windows files. */
+#define chmod(path, mode) ((void)(path), (void)(mode), 0)
+#endif
+
 extern bool log_enable;
 
 #define tools_logi(fmt, ...) \
