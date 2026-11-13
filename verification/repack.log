@@ -1,0 +1,13 @@
+[+]  Starting automatic repack...
+[+] Header Version: 2, Page Size: 2048, fmt_size: 777508
+[+] Detected DTB appended to kernel. Size: 158312
+[+] Compressing new kernel with GZIP...
+[+] Final kernel size after compression (if applied): 16566908 bytes
+[+] Rest data size: 83982336 bytes, Actual used size: 941488 bytes
+[+] second_size=0,offset=17459200
+[+] recovery_dtbo_size=0,offset=17459200
+[+] dtb_size=158376,dtb_addr=0
+[+] dtb_size=158312
+[+] Found AVB footer in rest data.0x55f4e20d1e80
+[+] avb_offset=940032
+[+] Repack completed: new-boot.img

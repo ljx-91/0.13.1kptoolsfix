@@ -1,0 +1,69 @@
+[+] kernel image_size: 0x02d5100c
+[+] kernel uefi header: false
+[+] kernel load_offset: 0x00080000
+[+] kernel kernel_size: 0x0389d000
+[+] kernel page_shift: 12
+[+] new kernel image ...
+[+] linux_banner 1: Linux version 4.14.141+ (compiler@comsz01078157) (Android (5484270 based on r353983c) clang version 9.0.3 (https://android.googlesource.com/toolchain/clang 745b335211bb9eadfa6aa6301f84715cee4b37c5) (https://android.googlesource.com/toolchain/llvm 60cf23e54e46c807513f7a36d0a7b777920b5881) (based on LLVM 9.0.3svn)) #1 SMP PREEMPT Tue Feb 15 12:32:17 CST 2022
+[+] linux_banner offset: 0x1e5aca8
+[+] kernel version major: 4, minor: 14, patch: 141
+[+] kallsyms_token_table offset: 0x01e4bd00
+[+] endian: little
+[+] kallsyms_token_index offset: 0x01e4c100
+[+] arm64 relocation kernel_va: 0xffffff8008081000
+[+] arm64 relocation table range: [0x02554218, 0x02af9c60), count: 0x0003c3c3
+[+] apply 0x0003c3c2 relocation entries
+[+] kallsyms_markers range: [0x01e4af00, 0x01e4bc30), count: 0x000001a6
+[?] find approximate kallsyms_offsets error
+[+] approximate kallsyms_addresses range: [0x01c1ce98, 0x01cee4c8) count: 0x0001a2c6
+[+] kallsyms_names offset: 0x01cef600
+[+] exact kallsyms_num_syms offset: 0x01cef500, value: 0x0001a5b9; full names/markers validation passed
+[?] no linux_banner, CONFIG_KALLSYMS_ALL=n
+[+] names table vector index: 0x00000012, pid_vnr index: 0x0000d165
+[?] candidate kernel base excludes the complete exact-sized address table; retrying
+[+] arm64 relocation kernel_va: 0xffffff8008081000, try: ffffff8008080000
+[+] arm64 relocation table range: [0x02554218, 0x02af9c60), count: 0x0003c3c3
+[+] apply 0x0003c3c2 relocation entries
+[+] kallsyms_markers range: [0x01e4af00, 0x01e4bc30), count: 0x000001a6
+[?] find approximate kallsyms_offsets error
+[+] approximate kallsyms_addresses range: [0x01c1c700, 0x01cef4c8) count: 0x0001a5b9
+[+] kallsyms_names offset: 0x01cef600
+[+] exact kallsyms_num_syms offset: 0x01cef500, value: 0x0001a5b9; full names/markers validation passed
+[?] no linux_banner, CONFIG_KALLSYMS_ALL=n
+[+] names table vector index: 0x00000012, pid_vnr index: 0x0000d165
+[+] pid_vnr verified SP_EL0 at +0x0, insn: 0xd5384108
+[+] vectors index: 18, offset: 0x00002800
+[+] pid_vnr offset: 0x01912460
+[+] kallsyms_addresses offset: 0x01c1c700
+[+] kernel base address: 0xffffff8008080000
+[+] layout kimg: 0x0,0x2d5100c, kpimg: 0x2d52000,0x3c280, extra: 0x2d8e280,0x80, end: 0x2d8e300, start: 0x389d000
+[+] kpimg version: d01
+[+] kpimg compile time: 13:53:01 Nov 13 2026
+[+] kpimg config: android, release
+[+] tcp_init_sock: type: t, offset: 0x019352c4
+[+] no first pac instruction found 
+[+] map_start: 0x19352c0, max_size: 0x800
+[+] tcp_init_sock: type: t, offset: 0x019352c4
+[+] Synced NOP modifications from kallsym_kimg to output file (offset: 0x19352c4, size: 0x1000)
+[+] kallsyms_lookup_name: type: t, offset: 0x01922680
+[+] printk: type: t, offset: 0x01921b14
+[+] memblock_reserve: type: t, offset: 0x019282d8
+[+] memblock_free: type: t, offset: 0x019282d4
+[+] memblock_mark_nomap: type: t, offset: 0x019282e8
+[?] no symbol: memblock_phys_alloc_try_nid
+[+] memblock_virt_alloc_try_nid: type: t, offset: 0x01914930
+[+] memblock_alloc_try_nid: type: t, offset: 0x01914928
+[+] panic: type: t, offset: 0x0192d364
+[+] rest_init: type: t, offset: 0x018f1280
+[?] no symbol: kernel_init
+[?] no symbol: report_cfi_failure
+[?] no symbol: __cfi_slowpath_diag
+[+] __cfi_slowpath: type: t, offset: 0x002ddc00
+[+] copy_process: type: t, offset: 0x000d901c
+[?] no symbol: avc_denied
+[+] slow_avc_audit: type: t, offset: 0x01917b34
+[+] input_handle_event: type: t, offset: 0x01094c18
+[+] superkey: Y73S-OFFLINE-ONLY-NOT-FOR-USE
+[+] paging_init: type: t, offset: 0x01940228
+[+] relocate branch function 0x1940228 to 0x20fbc7c
+[+] patch done: /mnt/data/y73s_kp0131_final/kernel-patched-final2

@@ -1,0 +1,811 @@
+make: Entering directory '/mnt/data/kp0131_patchgen/kernel'
+cp -Rf patch/include/uapi ../user/
+cp -f ../version ../user/
+cp -f include/preset.h ../tools/
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/setup.o base/setup.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -o base/setup1.o base/setup1.S
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -o base/cache.o base/cache.S
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/tlsf.o base/tlsf.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/start.o base/start.c
+In file included from base/start.c:11:
+include/cache.h:48:45: warning: value size does not match register size specified by the constraint and modifier [-Wasm-operand-widths]
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                                             ^
+include/cache.h:48:23: note: use constraint modifier "w"
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                       ^~
+      |                       %w0
+base/start.c:105:20: warning: unused function 'hw_dirty' [-Wunused-function]
+  105 | static inline bool hw_dirty()
+      |                    ^~~~~~~~
+2 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/map.o base/map.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -o base/map1.o base/map1.S
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/hook.o base/hook.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/fphook.o base/fphook.c
+In file included from base/fphook.c:7:
+include/cache.h:48:45: warning: value size does not match register size specified by the constraint and modifier [-Wasm-operand-widths]
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                                             ^
+include/cache.h:48:23: note: use constraint modifier "w"
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                       ^~
+      |                       %w0
+1 warning generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/hotpatch.o base/hotpatch.c
+In file included from base/hotpatch.c:7:
+include/cache.h:48:45: warning: value size does not match register size specified by the constraint and modifier [-Wasm-operand-widths]
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                                             ^
+include/cache.h:48:23: note: use constraint modifier "w"
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                       ^~
+      |                       %w0
+In file included from base/hotpatch.c:11:
+In file included from linux/arch/arm64/include/asm/atomic.h:24:
+linux/arch/arm64/include/asm/cmpxchg.h:67:5: warning: label at end of compound statement is a C23 extension [-Wc23-extensions]
+   67 |     }
+      |     ^
+linux/arch/arm64/include/asm/cmpxchg.h:147:5: warning: label at end of compound statement is a C23 extension [-Wc23-extensions]
+  147 |     }
+      |     ^
+3 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/hmem.o base/hmem.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/predata.o base/predata.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/symbol.o base/symbol.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o base/baselib.o base/baselib.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O0 -o base/sha256.o base/sha256.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/patch.o patch/patch.c
+In file included from patch/patch.c:5:
+In file included from patch/include/accctl.h:15:
+In file included from patch/include/taskext.h:11:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+3 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/accctl.o patch/common/accctl.c
+In file included from patch/common/accctl.c:6:
+In file included from patch/include/accctl.h:15:
+In file included from patch/include/taskext.h:11:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+patch/common/accctl.c:198:5: warning: label followed by a declaration is a C23 extension [-Wc23-extensions]
+  198 |     struct av_decision *avd = (struct av_decision *)_avd;
+      |     ^
+4 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/kstorage.o patch/common/kstorage.c
+In file included from patch/common/kstorage.c:4:
+In file included from linux/include/linux/rculist.h:9:
+linux/include/linux/rcupdate.h:81:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+   81 | }
+      | ^
+linux/include/linux/rcupdate.h:139:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  139 | }
+      | ^
+linux/include/linux/rcupdate.h:143:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  143 | }
+      | ^
+linux/include/linux/rcupdate.h:147:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  147 | }
+      | ^
+linux/include/linux/rcupdate.h:151:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  151 | }
+      | ^
+linux/include/linux/rcupdate.h:160:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  160 | }
+      | ^
+linux/include/linux/rcupdate.h:164:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  164 | }
+      | ^
+7 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/secpass.o patch/common/secpass.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/sucompat.o patch/common/sucompat.c
+In file included from patch/common/sucompat.c:22:
+In file included from patch/include/accctl.h:15:
+In file included from patch/include/taskext.h:11:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+In file included from patch/common/sucompat.c:28:
+In file included from linux/include/linux/rculist.h:9:
+linux/include/linux/rcupdate.h:81:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+   81 | }
+      | ^
+linux/include/linux/rcupdate.h:139:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  139 | }
+      | ^
+linux/include/linux/rcupdate.h:143:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  143 | }
+      | ^
+linux/include/linux/rcupdate.h:147:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  147 | }
+      | ^
+linux/include/linux/rcupdate.h:151:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  151 | }
+      | ^
+linux/include/linux/rcupdate.h:160:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  160 | }
+      | ^
+linux/include/linux/rcupdate.h:164:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  164 | }
+      | ^
+10 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/supercall.o patch/common/supercall.c
+In file included from patch/common/supercall.c:23:
+In file included from patch/include/accctl.h:15:
+In file included from patch/include/taskext.h:11:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+3 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/supercmd.o patch/common/supercmd.c
+In file included from patch/common/supercmd.c:15:
+In file included from patch/include/accctl.h:15:
+In file included from patch/include/taskext.h:11:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+3 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/syscall.o patch/common/syscall.c
+In file included from patch/common/syscall.c:8:
+include/cache.h:48:45: warning: value size does not match register size specified by the constraint and modifier [-Wasm-operand-widths]
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                                             ^
+include/cache.h:48:23: note: use constraint modifier "w"
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                       ^~
+      |                       %w0
+1 warning generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/sysname.o patch/common/sysname.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/taskob.o patch/common/taskob.c
+In file included from patch/common/taskob.c:7:
+In file included from patch/include/taskext.h:11:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+3 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/test.o patch/common/test.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/user_event.o patch/common/user_event.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/common/utils.o patch/common/utils.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/module/insn.o patch/module/insn.c
+In file included from patch/module/insn.c:7:
+include/cache.h:48:45: warning: value size does not match register size specified by the constraint and modifier [-Wasm-operand-widths]
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                                             ^
+include/cache.h:48:23: note: use constraint modifier "w"
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                       ^~
+      |                       %w0
+In file included from patch/module/insn.c:10:
+In file included from linux/arch/arm64/include/asm/atomic.h:24:
+linux/arch/arm64/include/asm/cmpxchg.h:67:5: warning: label at end of compound statement is a C23 extension [-Wc23-extensions]
+   67 |     }
+      |     ^
+linux/arch/arm64/include/asm/cmpxchg.h:147:5: warning: label at end of compound statement is a C23 extension [-Wc23-extensions]
+  147 |     }
+      |     ^
+3 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/module/module.o patch/module/module.c
+In file included from patch/module/module.c:13:
+include/cache.h:48:45: warning: value size does not match register size specified by the constraint and modifier [-Wasm-operand-widths]
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                                             ^
+include/cache.h:48:23: note: use constraint modifier "w"
+   48 |     asm volatile("mrs %0, CurrentEL" : "=r"(el));
+      |                       ^~
+      |                       %w0
+In file included from patch/module/module.c:23:
+linux/include/linux/rcupdate.h:81:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+   81 | }
+      | ^
+linux/include/linux/rcupdate.h:139:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  139 | }
+      | ^
+linux/include/linux/rcupdate.h:143:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  143 | }
+      | ^
+linux/include/linux/rcupdate.h:147:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  147 | }
+      | ^
+linux/include/linux/rcupdate.h:151:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  151 | }
+      | ^
+linux/include/linux/rcupdate.h:160:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  160 | }
+      | ^
+linux/include/linux/rcupdate.h:164:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]
+  164 | }
+      | ^
+patch/module/module.c:184:13: warning: label followed by a declaration is a C23 extension [-Wc23-extensions]
+  184 |             unsigned long addr = symbol_lookup_name(name);
+      |             ^
+patch/module/module.c:40:20: warning: unused function 'strstarts' [-Wunused-function]
+   40 | static inline bool strstarts(const char *str, const char *prefix)
+      |                    ^~~~~~~~~
+10 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/module/relo.o patch/module/relo.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/ksyms/execv.o patch/ksyms/execv.c
+patch/ksyms/execv.c:65:16: warning: variable 'ret' set but not used [-Wunused-but-set-variable]
+   65 |     hook_err_t ret = 0;
+      |                ^
+1 warning generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/ksyms/libs.o patch/ksyms/libs.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/ksyms/misc.o patch/ksyms/misc.c
+In file included from patch/ksyms/misc.c:14:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+3 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/ksyms/task_cred.o patch/ksyms/task_cred.c
+In file included from patch/ksyms/task_cred.c:10:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+3 warnings generated.
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/android/sepolicy_flags.o patch/android/sepolicy_flags.c
+clang --target=aarch64-linux-gnu -fno-pic -fno-pie -Wall -fno-builtin -std=gnu11 -nostdinc -mgeneral-regs-only -g -DANDROID -I. -Iinclude -Ipatch/include -Ilinux -Ilinux/include -Ilinux/arch/arm64/include -Ilinux/tools/arch/arm64/include -c -O2 -o patch/android/userd.o patch/android/userd.c
+In file included from patch/android/userd.c:20:
+In file included from patch/include/accctl.h:15:
+In file included from patch/include/taskext.h:11:
+linux/include/linux/sched/task.h:101:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  101 | }
+      | ^
+linux/include/linux/sched/task.h:107:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  107 | }
+      | ^
+linux/include/linux/sched/task.h:149:1: warning: function declared 'noreturn' should not return [-Winvalid-noreturn]
+  149 | }
+      | ^
+patch/android/userd.c:106:15: warning: unused function 'kernel_write_file' [-Wunused-function]
+  106 | static loff_t kernel_write_file(const char *path, const void *data, loff_t len, umode_t mode)
+      |               ^~~~~~~~~~~~~~~~~
+4 warnings generated.
+ld.lld -m aarch64elf -nostdlib -static -no-pie -Tkpimg.lds -o kpimg.elf base/setup.o base/setup1.o base/cache.o base/tlsf.o base/start.o base/map.o base/map1.o base/hook.o base/fphook.o base/hotpatch.o base/hmem.o base/predata.o base/symbol.o base/baselib.o base/sha256.o patch/patch.o patch/common/accctl.o patch/common/kstorage.o patch/common/secpass.o patch/common/sucompat.o patch/common/supercall.o patch/common/supercmd.o patch/common/syscall.o patch/common/sysname.o patch/common/taskob.o patch/common/test.o patch/common/user_event.o patch/common/utils.o patch/module/insn.o patch/module/module.o patch/module/relo.o patch/ksyms/execv.o patch/ksyms/libs.o patch/ksyms/misc.o patch/ksyms/task_cred.o patch/android/sepolicy_flags.o patch/android/userd.o
+llvm-objcopy -O binary -S kpimg.elf kpimg
+make: Leaving directory '/mnt/data/kp0131_patchgen/kernel'
+make: Entering directory '/mnt/data/kp0131_patchgen/tools'
+rm -rf kptools
+rm -f *.o
+rm -f lib/bz2/*.o
+rm -f lib/lz4/*.o
+rm -f lib/sha/*.o
+rm -f lib/xz/*.o
+make: Leaving directory '/mnt/data/kp0131_patchgen/tools'
+make: Entering directory '/mnt/data/kp0131_patchgen/tools'
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  image.c -o image.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  kallsym.c -o kallsym.o
+In file included from kallsym.c:19:
+kallsym.c: In function 'correct_addresses_or_offsets_by_vectors':
+common.h:20:37: warning: format '%llx' expects argument of type 'long long unsigned int', but argument 3 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+   20 |     if (log_enable) fprintf(stdout, "[+] " fmt, ##__VA_ARGS__);
+      |                                     ^~~~~~
+kallsym.c:827:9: note: in expansion of macro 'tools_logi'
+  827 |         tools_logi("kernel base address: 0x%08llx\n", info->kernel_base);
+      |         ^~~~~~~~~~
+kallsym.c: In function 'correct_addresses_or_offsets_by_banner':
+common.h:20:37: warning: format '%llx' expects argument of type 'long long unsigned int', but argument 3 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+   20 |     if (log_enable) fprintf(stdout, "[+] " fmt, ##__VA_ARGS__);
+      |                                     ^~~~~~
+kallsym.c:892:9: note: in expansion of macro 'tools_logi'
+  892 |         tools_logi("kernel base address: 0x%llx\n", info->kernel_base);
+      |         ^~~~~~~~~~
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  kptools.c -o kptools.o
+kptools.c: In function 'main':
+kptools.c:157:23: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  157 |             root_skey = true;
+      |                       ^
+kptools.c:158:9: note: here
+  158 |         case 's':
+      |         ^~~~
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  order.c -o order.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  insn.c -o insn.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  patch.c -o patch.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  symbol.c -o symbol.o
+symbol.c: In function 'select_map_area':
+symbol.c:77:28: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'unsigned int'} and 'int32_t' {aka 'int'} [-Wsign-compare]
+   77 |     for (uint32_t i = 0; i < *max_size; i += asmbit) {
+      |                            ^
+symbol.c:97:40: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'unsigned int'} and 'int' [-Wsign-compare]
+   97 |         for (uint32_t j = *max_size; j < *max_size * 2; j += asmbit) {
+      |                                        ^
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  kpm.c -o kpm.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  common.c -o common.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  bootimg.c -o bootimg.o
+bootimg.c: In function 'auto_depress':
+bootimg.c:495:28: warning: comparison of integer expressions of different signedness: 'uint32_t' {aka 'unsigned int'} and 'int' [-Wsign-compare]
+  495 |             if (block_size > LZ4_compressBound(LZ4_BLOCK_SIZE))
+      |                            ^
+bootimg.c: In function 'repack_bootimg':
+bootimg.c:1054:21: warning: comparison of integer expressions of different signedness: 'long int' and 'long unsigned int' [-Wsign-compare]
+ 1054 |     if (current_pos < total_size - sizeof(avb)) {
+      |                     ^
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/bz2/blocksort.c -o lib/bz2/blocksort.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/bz2/bzlib.c -o lib/bz2/bzlib.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/bz2/compress.c -o lib/bz2/compress.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/bz2/crctable.c -o lib/bz2/crctable.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/bz2/decompress.c -o lib/bz2/decompress.o
+lib/bz2/decompress.c: In function 'BZ2_decompress':
+lib/bz2/decompress.c:198:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  198 |       if (uc != BZ_HDR_B) RETURN(BZ_DATA_ERROR_MAGIC);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:200:7: note: in expansion of macro 'GET_UCHAR'
+  200 |       GET_UCHAR(BZ_X_MAGIC_2, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:201:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  201 |       if (uc != BZ_HDR_Z) RETURN(BZ_DATA_ERROR_MAGIC);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:203:7: note: in expansion of macro 'GET_UCHAR'
+  203 |       GET_UCHAR(BZ_X_MAGIC_3, uc)
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:204:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  204 |       if (uc != BZ_HDR_h) RETURN(BZ_DATA_ERROR_MAGIC);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:206:7: note: in expansion of macro 'GET_BITS'
+  206 |       GET_BITS(BZ_X_MAGIC_4, s->blockSize100k, 8)
+      |       ^~~~~~~~
+lib/bz2/decompress.c:211:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  211 |       if (s->smallDecompress) {
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:222:7: note: in expansion of macro 'GET_UCHAR'
+  222 |       GET_UCHAR(BZ_X_BLKHDR_1, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:225:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  225 |       if (uc != 0x31) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:226:7: note: in expansion of macro 'GET_UCHAR'
+  226 |       GET_UCHAR(BZ_X_BLKHDR_2, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:227:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  227 |       if (uc != 0x41) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:228:7: note: in expansion of macro 'GET_UCHAR'
+  228 |       GET_UCHAR(BZ_X_BLKHDR_3, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:229:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  229 |       if (uc != 0x59) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:230:7: note: in expansion of macro 'GET_UCHAR'
+  230 |       GET_UCHAR(BZ_X_BLKHDR_4, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:231:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  231 |       if (uc != 0x26) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:232:7: note: in expansion of macro 'GET_UCHAR'
+  232 |       GET_UCHAR(BZ_X_BLKHDR_5, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:233:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  233 |       if (uc != 0x53) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:234:7: note: in expansion of macro 'GET_UCHAR'
+  234 |       GET_UCHAR(BZ_X_BLKHDR_6, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:241:25: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  241 |       s->storedBlockCRC = 0;
+      |       ~~~~~~~~~~~~~~~~~~^~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:242:7: note: in expansion of macro 'GET_UCHAR'
+  242 |       GET_UCHAR(BZ_X_BCRC_1, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:243:25: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  243 |       s->storedBlockCRC = (s->storedBlockCRC << 8) | ((UInt32)uc);
+      |       ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:244:7: note: in expansion of macro 'GET_UCHAR'
+  244 |       GET_UCHAR(BZ_X_BCRC_2, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:245:25: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  245 |       s->storedBlockCRC = (s->storedBlockCRC << 8) | ((UInt32)uc);
+      |       ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:246:7: note: in expansion of macro 'GET_UCHAR'
+  246 |       GET_UCHAR(BZ_X_BCRC_3, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:247:25: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  247 |       s->storedBlockCRC = (s->storedBlockCRC << 8) | ((UInt32)uc);
+      |       ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:248:7: note: in expansion of macro 'GET_UCHAR'
+  248 |       GET_UCHAR(BZ_X_BCRC_4, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:249:25: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  249 |       s->storedBlockCRC = (s->storedBlockCRC << 8) | ((UInt32)uc);
+      |       ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:251:7: note: in expansion of macro 'GET_BITS'
+  251 |       GET_BITS(BZ_X_RANDBIT, s->blockRandomised, 1);
+      |       ^~~~~~~~
+lib/bz2/decompress.c:253:18: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  253 |       s->origPtr = 0;
+      |       ~~~~~~~~~~~^~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:254:7: note: in expansion of macro 'GET_UCHAR'
+  254 |       GET_UCHAR(BZ_X_ORIGPTR_1, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:255:18: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  255 |       s->origPtr = (s->origPtr << 8) | ((Int32)uc);
+      |       ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:256:7: note: in expansion of macro 'GET_UCHAR'
+  256 |       GET_UCHAR(BZ_X_ORIGPTR_2, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:257:18: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  257 |       s->origPtr = (s->origPtr << 8) | ((Int32)uc);
+      |       ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:258:7: note: in expansion of macro 'GET_UCHAR'
+  258 |       GET_UCHAR(BZ_X_ORIGPTR_3, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:284:17: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  284 |       alphaSize = s->nInUse+2;
+      |       ~~~~~~~~~~^~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:287:7: note: in expansion of macro 'GET_BITS'
+  287 |       GET_BITS(BZ_X_SELECTOR_1, nGroups, 3);
+      |       ^~~~~~~~
+lib/bz2/decompress.c:288:23: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  288 |       if (nGroups < 2 || nGroups > BZ_N_GROUPS) RETURN(BZ_DATA_ERROR);
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:289:7: note: in expansion of macro 'GET_BITS'
+  289 |       GET_BITS(BZ_X_SELECTOR_2, nSelectors, 15);
+      |       ^~~~~~~~
+lib/bz2/decompress.c:292:12: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  292 |          j = 0;
+      |          ~~^~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:71:4: note: in expansion of macro 'GET_BITS'
+   71 |    GET_BITS(lll,uuu,1)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:294:13: note: in expansion of macro 'GET_BIT'
+  294 |             GET_BIT(BZ_X_SELECTOR_3, uc);
+      |             ^~~~~~~
+lib/bz2/decompress.c:327:29: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  327 |                if (curr < 1 || curr > 20) RETURN(BZ_DATA_ERROR);
+      |                    ~~~~~~~~~^~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:71:4: note: in expansion of macro 'GET_BITS'
+   71 |    GET_BITS(lll,uuu,1)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:328:16: note: in expansion of macro 'GET_BIT'
+  328 |                GET_BIT(BZ_X_CODING_2, uc);
+      |                ^~~~~~~
+lib/bz2/decompress.c:329:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  329 |                if (uc == 0) break;
+      |                   ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:71:4: note: in expansion of macro 'GET_BITS'
+   71 |    GET_BITS(lll,uuu,1)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:330:16: note: in expansion of macro 'GET_BIT'
+  330 |                GET_BIT(BZ_X_CODING_3, uc);
+      |                ^~~~~~~
+lib/bz2/decompress.c:88:7: warning: this statement may fall through [-Wimplicit-fallthrough=]
+   88 |    zn = gMinlen;                                  \
+      |    ~~~^~~~~~~~~
+lib/bz2/decompress.c:379:7: note: in expansion of macro 'GET_MTF_VAL'
+  379 |       GET_MTF_VAL(BZ_X_MTF_1, BZ_X_MTF_2, nextSym);
+      |       ^~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:89:4: note: in expansion of macro 'GET_BITS'
+   89 |    GET_BITS(label1, zvec, zn);                    \
+      |    ^~~~~~~~
+lib/bz2/decompress.c:379:7: note: in expansion of macro 'GET_MTF_VAL'
+  379 |       GET_MTF_VAL(BZ_X_MTF_1, BZ_X_MTF_2, nextSym);
+      |       ^~~~~~~~~~~
+lib/bz2/decompress.c:94:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+   94 |       zn++;                                       \
+      |       ~~^~
+lib/bz2/decompress.c:379:7: note: in expansion of macro 'GET_MTF_VAL'
+  379 |       GET_MTF_VAL(BZ_X_MTF_1, BZ_X_MTF_2, nextSym);
+      |       ^~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:71:4: note: in expansion of macro 'GET_BITS'
+   71 |    GET_BITS(lll,uuu,1)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:95:7: note: in expansion of macro 'GET_BIT'
+   95 |       GET_BIT(label2, zj);                        \
+      |       ^~~~~~~
+lib/bz2/decompress.c:379:7: note: in expansion of macro 'GET_MTF_VAL'
+  379 |       GET_MTF_VAL(BZ_X_MTF_1, BZ_X_MTF_2, nextSym);
+      |       ^~~~~~~~~~~
+lib/bz2/decompress.c:88:7: warning: this statement may fall through [-Wimplicit-fallthrough=]
+   88 |    zn = gMinlen;                                  \
+      |    ~~~^~~~~~~~~
+lib/bz2/decompress.c:489:13: note: in expansion of macro 'GET_MTF_VAL'
+  489 |             GET_MTF_VAL(BZ_X_MTF_5, BZ_X_MTF_6, nextSym);
+      |             ^~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:89:4: note: in expansion of macro 'GET_BITS'
+   89 |    GET_BITS(label1, zvec, zn);                    \
+      |    ^~~~~~~~
+lib/bz2/decompress.c:489:13: note: in expansion of macro 'GET_MTF_VAL'
+  489 |             GET_MTF_VAL(BZ_X_MTF_5, BZ_X_MTF_6, nextSym);
+      |             ^~~~~~~~~~~
+lib/bz2/decompress.c:94:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+   94 |       zn++;                                       \
+      |       ~~^~
+lib/bz2/decompress.c:489:13: note: in expansion of macro 'GET_MTF_VAL'
+  489 |             GET_MTF_VAL(BZ_X_MTF_5, BZ_X_MTF_6, nextSym);
+      |             ^~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:71:4: note: in expansion of macro 'GET_BITS'
+   71 |    GET_BITS(lll,uuu,1)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:95:7: note: in expansion of macro 'GET_BIT'
+   95 |       GET_BIT(label2, zj);                        \
+      |       ^~~~~~~
+lib/bz2/decompress.c:489:13: note: in expansion of macro 'GET_MTF_VAL'
+  489 |             GET_MTF_VAL(BZ_X_MTF_5, BZ_X_MTF_6, nextSym);
+      |             ^~~~~~~~~~~
+lib/bz2/decompress.c:591:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  591 |       if (uc != 0x72) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:592:7: note: in expansion of macro 'GET_UCHAR'
+  592 |       GET_UCHAR(BZ_X_ENDHDR_3, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:593:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  593 |       if (uc != 0x45) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:594:7: note: in expansion of macro 'GET_UCHAR'
+  594 |       GET_UCHAR(BZ_X_ENDHDR_4, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:595:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  595 |       if (uc != 0x38) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:596:7: note: in expansion of macro 'GET_UCHAR'
+  596 |       GET_UCHAR(BZ_X_ENDHDR_5, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:597:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  597 |       if (uc != 0x50) RETURN(BZ_DATA_ERROR);
+      |          ^
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:598:7: note: in expansion of macro 'GET_UCHAR'
+  598 |       GET_UCHAR(BZ_X_ENDHDR_6, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:601:28: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  601 |       s->storedCombinedCRC = 0;
+      |       ~~~~~~~~~~~~~~~~~~~~~^~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:602:7: note: in expansion of macro 'GET_UCHAR'
+  602 |       GET_UCHAR(BZ_X_CCRC_1, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:603:28: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  603 |       s->storedCombinedCRC = (s->storedCombinedCRC << 8) | ((UInt32)uc);
+      |       ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:604:7: note: in expansion of macro 'GET_UCHAR'
+  604 |       GET_UCHAR(BZ_X_CCRC_2, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:605:28: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  605 |       s->storedCombinedCRC = (s->storedCombinedCRC << 8) | ((UInt32)uc);
+      |       ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:606:7: note: in expansion of macro 'GET_UCHAR'
+  606 |       GET_UCHAR(BZ_X_CCRC_3, uc);
+      |       ^~~~~~~~~
+lib/bz2/decompress.c:607:28: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  607 |       s->storedCombinedCRC = (s->storedCombinedCRC << 8) | ((UInt32)uc);
+      |       ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lib/bz2/decompress.c:44:4: note: here
+   44 |    case lll: s->state = lll;                      \
+      |    ^~~~
+lib/bz2/decompress.c:68:4: note: in expansion of macro 'GET_BITS'
+   68 |    GET_BITS(lll,uuu,8)
+      |    ^~~~~~~~
+lib/bz2/decompress.c:608:7: note: in expansion of macro 'GET_UCHAR'
+  608 |       GET_UCHAR(BZ_X_CCRC_4, uc);
+      |       ^~~~~~~~~
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/bz2/huffman.c -o lib/bz2/huffman.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/bz2/randtable.c -o lib/bz2/randtable.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/lz4/lz4.c -o lib/lz4/lz4.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/lz4/lz4file.c -o lib/lz4/lz4file.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/lz4/lz4frame.c -o lib/lz4/lz4frame.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/lz4/lz4hc.c -o lib/lz4/lz4hc.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/lz4/xxhash.c -o lib/lz4/xxhash.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/sha/sha1.c -o lib/sha/sha1.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/sha/sha256.c -o lib/sha/sha256.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/xz/xz_crc32.c -o lib/xz/xz_crc32.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/xz/xz_dec_lzma2.c -o lib/xz/xz_dec_lzma2.o
+cc -c -std=c11 -Wall -Wextra -Wno-unused -Wno-unused-parameter -I. -I./lib -DBZ_NO_STDIO -DXZ_DEC_ANY_CHECK  lib/xz/xz_dec_stream.c -o lib/xz/xz_dec_stream.o
+cc -o kptools image.o kallsym.o kptools.o order.o insn.o patch.o symbol.o kpm.o common.o bootimg.o lib/bz2/blocksort.o lib/bz2/bzlib.o lib/bz2/compress.o lib/bz2/crctable.o lib/bz2/decompress.o lib/bz2/huffman.o lib/bz2/randtable.o lib/lz4/lz4.o lib/lz4/lz4file.o lib/lz4/lz4frame.o lib/lz4/lz4hc.o lib/lz4/xxhash.o lib/sha/sha1.o lib/sha/sha256.o lib/xz/xz_crc32.o lib/xz/xz_dec_lzma2.o lib/xz/xz_dec_stream.o -lz
+make: Leaving directory '/mnt/data/kp0131_patchgen/tools'
+[kpimg]
+version=0xd01
+compile_time=13:53:01 Nov 13 2026
+config=android,release
+superkey=
+root_superkey=0000000000000000000000000000000000000000000000000000000000000000
+[additional]
+
