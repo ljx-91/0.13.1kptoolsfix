@@ -8,6 +8,7 @@ on:
     paths:
       - "tools/**"
       - "kernel/include/preset.h"
+      - "README-Windows.md"
       - ".github/workflows/windows-kptools.yml"
 
 permissions:
