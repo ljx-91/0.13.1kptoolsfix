@@ -68,7 +68,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kptools-windows-x64
-          path: |
-            tools/build/windows-x64/kptools.exe
-            README-Windows.md
+          path: tools/build/windows-x64/kptools.exe
           if-no-files-found: error
