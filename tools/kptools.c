@@ -70,7 +70,7 @@ void print_usage(char **argv)
     fprintf(stdout, c, version, program_name);
 }
 
-int main(int argc, char *argv[])
+static int kptools_main(int argc, char *argv[])
 {
     version = (MAJOR << 16) + (MINOR << 8) + PATCH;
     program_name = argv[0];
@@ -227,3 +227,52 @@ int main(int argc, char *argv[])
 
     return ret;
 }
+
+#ifdef _WIN32
+/*
+ * Windows passes command-line arguments as UTF-16. Convert them to UTF-8 so
+ * paths containing non-ASCII characters remain valid throughout kptools.
+ */
+int wmain(int argc, wchar_t *wargv[])
+{
+    char **argv = (char **)calloc((size_t)argc + 1, sizeof(char *));
+    if (!argv) {
+        fprintf(stderr, "[-] out of memory while parsing command line\\n");
+        return EXIT_FAILURE;
+    }
+
+    for (int i = 0; i < argc; ++i) {
+        int bytes = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS,
+                                        wargv[i], -1, NULL, 0, NULL, NULL);
+        if (bytes <= 0) {
+            fprintf(stderr, "[-] invalid UTF-16 command-line argument\\n");
+            for (int j = 0; j < i; ++j) free(argv[j]);
+            free(argv);
+            return EXIT_FAILURE;
+        }
+
+        argv[i] = (char *)malloc((size_t)bytes);
+        if (!argv[i] ||
+            !WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS,
+                                 wargv[i], -1, argv[i], bytes, NULL, NULL)) {
+            fprintf(stderr, "[-] failed to convert command-line argument\\n");
+            for (int j = 0; j <= i; ++j) free(argv[j]);
+            free(argv);
+            return EXIT_FAILURE;
+        }
+    }
+
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
+    int ret = kptools_main(argc, argv);
+    for (int i = 0; i < argc; ++i) free(argv[i]);
+    free(argv);
+    return ret;
+}
+#else
+int main(int argc, char *argv[])
+{
+    return kptools_main(argc, argv);
+}
+#endif
