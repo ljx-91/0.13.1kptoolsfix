@@ -54,6 +54,14 @@ jobs:
           & $exe --version
           if ($LASTEXITCODE -ne 0) { throw "kptools --version failed: $LASTEXITCODE" }
 
+          $utf8Path = Join-Path $env:RUNNER_TEMP "kptools-中文路径.bin"
+          [System.IO.File]::WriteAllBytes($utf8Path, [System.Text.Encoding]::UTF8.GetBytes("kptools-windows-utf8"))
+          $expected = (Get-FileHash -Algorithm SHA1 $utf8Path).Hash.ToLowerInvariant()
+          $actual = (& $exe sha1 $utf8Path).Trim().ToLowerInvariant()
+          if ($LASTEXITCODE -ne 0 -or $actual -ne $expected) {
+            throw "UTF-8 path test failed. expected=$expected actual=$actual"
+          }
+
       - name: Verify runtime dependencies
         shell: msys2 {0}
         run: |
