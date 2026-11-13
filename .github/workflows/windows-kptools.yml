@@ -7,6 +7,8 @@ on:
       - windows-kptools-ucrt64-20261113
     paths:
       - "tools/**"
+      - "kernel/**"
+      - "version"
       - "kernel/include/preset.h"
       - "README-Windows.md"
       - ".github/workflows/windows-kptools.yml"
@@ -77,4 +79,65 @@ jobs:
         with:
           name: kptools-windows-x64
           path: tools/build/windows-x64/kptools.exe
+          if-no-files-found: error
+
+  build-kpimg-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install ARM64 bare-metal toolchain
+        run: |
+          curl -L --fail -o arm-toolchain.tar.xz https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf.tar.xz
+          tar -Jxf arm-toolchain.tar.xz
+
+      - name: Build Android kpimg for ARM64
+        run: |
+          export TARGET_COMPILE="$GITHUB_WORKSPACE/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin/aarch64-none-elf-"
+          export ANDROID=1
+          make -C kernel
+          mkdir -p package
+          cp kernel/kpimg package/kpimg
+          file package/kpimg
+
+      - name: Upload kpimg
+        uses: actions/upload-artifact@v4
+        with:
+          name: kpimg-android
+          path: package/kpimg
+          if-no-files-found: error
+
+  package-windows-tools:
+    runs-on: ubuntu-latest
+    needs:
+      - build-windows-x64
+      - build-kpimg-android
+    steps:
+      - name: Download Windows kptools
+        uses: actions/download-artifact@v4
+        with:
+          name: kptools-windows-x64
+          path: package
+
+      - name: Download Android kpimg
+        uses: actions/download-artifact@v4
+        with:
+          name: kpimg-android
+          path: package
+
+      - name: Verify two-file package
+        run: |
+          test -s package/kptools.exe
+          test -s package/kpimg
+          test "$(find package -maxdepth 1 -type f | wc -l)" -eq 2
+          file package/kptools.exe package/kpimg
+
+      - name: Upload combined package
+        uses: actions/upload-artifact@v4
+        with:
+          name: kptools-windows-y73s
+          path: |
+            package/kptools.exe
+            package/kpimg
           if-no-files-found: error
