@@ -39,3 +39,9 @@ find_package(ZLIB REQUIRED)
 target_include_directories(kptools PRIVATE ${ZLIB_INCLUDE_DIRS})
 
 target_link_libraries(kptools PRIVATE ${ZLIB_LIBRARIES})
+# MinGW uses a dedicated CRT startup object for wmain. Keep this flag on
+# the kptools target only; putting it in global linker flags breaks CMake's
+# compiler-identification test executable (which has a normal main()).
+if(WIN32)
+    set_property(TARGET kptools APPEND_STRING PROPERTY LINK_FLAGS " -municode")
+endif()
