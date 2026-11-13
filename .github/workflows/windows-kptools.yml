@@ -1,0 +1,72 @@
+name: Build Windows kptools
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - windows-kptools-ucrt64-20261113
+    paths:
+      - "tools/**"
+      - "kernel/include/preset.h"
+      - ".github/workflows/windows-kptools.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows-x64:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up MinGW-w64 UCRT64
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          path-type: inherit
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-make
+            mingw-w64-ucrt-x86_64-zlib
+
+      - name: Build native Windows executable
+        shell: msys2 {0}
+        run: |
+          cp kernel/include/preset.h tools/preset.h
+          cmake -S tools -B tools/build/windows-x64 \
+            -G "MinGW Makefiles" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_EXE_LINKER_FLAGS="-static -static-libgcc -static-libstdc++"
+          cmake --build tools/build/windows-x64 --parallel
+
+      - name: Smoke test
+        shell: pwsh
+        run: |
+          $exe = ".\tools\build\windows-x64\kptools.exe"
+          if (!(Test-Path $exe)) { throw "kptools.exe was not produced" }
+          & $exe --help
+          if ($LASTEXITCODE -ne 0) { throw "kptools --help failed: $LASTEXITCODE" }
+          & $exe --version
+          if ($LASTEXITCODE -ne 0) { throw "kptools --version failed: $LASTEXITCODE" }
+
+      - name: Verify runtime dependencies
+        shell: msys2 {0}
+        run: |
+          deps="$(objdump -p tools/build/windows-x64/kptools.exe | grep 'DLL Name' || true)"
+          echo "$deps"
+          if echo "$deps" | grep -Eiq 'msys-2\.0|zlib1\.dll|libgcc_s|libstdc\+\+'; then
+            echo "Unexpected non-system runtime dependency detected"
+            exit 1
+          fi
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kptools-windows-x64
+          path: |
+            tools/build/windows-x64/kptools.exe
+            README-Windows.md
+          if-no-files-found: error
