@@ -8,6 +8,49 @@
 
 bool log_enable = false;
 
+#ifdef _WIN32
+FILE *kp_fopen(const char *path, const char *mode)
+{
+    if (!path || !mode) {
+        errno = EINVAL;
+        return NULL;
+    }
+
+    int path_chars = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS,
+                                         path, -1, NULL, 0);
+    if (path_chars <= 0) {
+        errno = EINVAL;
+        return NULL;
+    }
+
+    wchar_t *wide_path = (wchar_t *)malloc((size_t)path_chars * sizeof(wchar_t));
+    size_t mode_chars = strlen(mode) + 1;
+    wchar_t *wide_mode = (wchar_t *)malloc(mode_chars * sizeof(wchar_t));
+    if (!wide_path || !wide_mode) {
+        free(wide_path);
+        free(wide_mode);
+        errno = ENOMEM;
+        return NULL;
+    }
+
+    if (!MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS,
+                             path, -1, wide_path, path_chars)) {
+        free(wide_path);
+        free(wide_mode);
+        errno = EINVAL;
+        return NULL;
+    }
+
+    for (size_t i = 0; i < mode_chars; ++i)
+        wide_mode[i] = (unsigned char)mode[i];
+
+    FILE *fp = _wfopen(wide_path, wide_mode);
+    free(wide_path);
+    free(wide_mode);
+    return fp;
+}
+#endif
+
 int can_b_imm(uint64_t from, uint64_t to)
 {
     // B: 128M
